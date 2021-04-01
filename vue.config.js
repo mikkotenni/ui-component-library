@@ -5,7 +5,8 @@
 */
 function getUiComponentLibraryExternals() {
   return {
-    lodash: 'lodash'
+    lodash: 'lodash',
+    underscore: 'underscore'
   };
 }
 
