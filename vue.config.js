@@ -1,4 +1,4 @@
-const webpack = require("webpack");
+// https://cli.vuejs.org/config/
 
 /*
 * Return shared resources considered as externals.
