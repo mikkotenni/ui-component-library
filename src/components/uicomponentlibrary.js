@@ -6,9 +6,7 @@
 
 import Vue from 'vue';
 // Import components to be included in library.
-import SharedResourcesTest from '@/components/SharedResourcesTest.vue';
-import HelloWorld from './HelloWorld.vue';
-import VueText from './Component.Text.vue';
+import LibVueBlock from '@/components/library/Block.vue';
 
 /*
 * Add imported component as property so it can be registered as component.
@@ -16,9 +14,7 @@ import VueText from './Component.Text.vue';
 * registered.
 */
 const Components = {
-  HelloWorld,
-  SharedResourcesTest,
-  VueText
+  LibVueBlock
 };
 
 Object.keys(Components).forEach((name) => {
