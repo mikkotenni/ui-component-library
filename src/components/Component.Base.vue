@@ -66,6 +66,19 @@ export default Vue.extend({
         })
       );
     },
+    stripHtml(txt, limitLength) {
+      var _txt = txt && txt.replace ? txt.replace(/<(?:.|\n)*?>/gm, "") : txt;
+      if (limitLength) {
+        _txt = this.limitTextLength(_txt, limitLength);
+      }
+      return _txt;
+    },
+    limitTextLength(txt, length) {
+      if (txt && txt.length > length) {
+        txt = txt.substr(0, length) + "...";
+      }
+      return txt;
+    },
   },
 });
 </script>

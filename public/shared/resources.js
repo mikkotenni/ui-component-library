@@ -1,4 +1,17 @@
-var Sympa = Sympa || {};
+/* eslint-disable */
+
+/*
+ * Todo: Handle Resources calls in more elegant manner. Translations do not need to work
+ * but let's have some sort of re-usable mechanism for this.
+ */
+const Resources = function (t) {
+  return "[" + t + "]";
+};
+
+/*
+* Todo: make Sympa and Sympa.Helpers mock-up more elegant way.
+*/
+const Sympa = {};
 const Helpers = {};
 Helpers.isEmptyOrWhitespace = function (str) {
   return !str || (str.trim && !str.trim() || false);
@@ -22,5 +35,6 @@ Helpers.limitTextLength = function (txt, length) {
   }
   return txt;
 };
+Sympa.Helpers = Helpers;
 
-Sympa.Helpers = {...Helpers};
+/* eslint-enable */

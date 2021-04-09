@@ -2,7 +2,7 @@
   <div class="vue-block">
     <div class="vue-block__title-bar">
       <div class="vue-block__title">
-        {{ sanitizedTitle | stripHtml }}
+        {{ sanitizedTitle }}
       </div>
       <div v-if="sanitizedActions" class="vue-block__actions-menu">
         <vue-popper :manual="true">
@@ -15,7 +15,7 @@
                 class="popup-menu__item"
                 @click="startAction(item.action)"
               >
-                {{ item.text | stripHtml }}
+                {{ item.text }}
               </div>
             </div>
           </template>
@@ -46,25 +46,10 @@
 </template>
 
 <script>
+/* eslint-disable */
 import Vue from "vue";
-import VuePopper from "@/components/library/Popper.vue";
-import ComponentBase from "@/components/Component.Base.vue";
-
-/*
- * Todo: Handle Resources calls in more elegant manner. Translations do not need to work
- * but let's have some sort of mechanism for handling the calls as they are frequently
- * used in main solution.
- */
-const Resources = function (t) {
-  return "[" + t + "]";
-};
-
-// Don't raise ESLint errors on following undeclared variables of shared resources:
-/* global Sympa */
-// Todo: Again, some more elegant and more re-usable solution could be in order.
-Vue.filter("stripHtml", function (value) {
-  return Sympa.Helpers.stripHtml(value);
-});
+import VuePopper from "./Popper.vue";
+import ComponentBase from "../Component.Base.vue";
 
 export default Vue.extend({
   name: "LibVueBlock",
@@ -131,16 +116,21 @@ export default Vue.extend({
   },
   computed: {
     sanitizedTitle: function () {
-      return this.titleIsTermKey === true && this.title.length > 0
-        ? Resources(this.title)
-        : this.title;
+      return this.stripHtml(
+        this.titleIsTermKey === true && this.title.length > 0
+          ? Resources(this.title)
+          : this.title
+      );
     },
     sanitizedActions: function () {
       if (this.actions && this.actions.length > 0) {
+        const that = this;
         return this.actions.map(function (item, index) {
           return {
             order: index + 1,
-            text: item.isTermKey ? Resources(item.text) : item.text,
+            text: that.stripHtml(
+              item.isTermKey ? Resources(item.text) : item.text
+            ),
             action: item.action ? item.action : null,
           };
         });
@@ -160,6 +150,7 @@ export default Vue.extend({
     },
   },
 });
+/* eslint-enable */
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

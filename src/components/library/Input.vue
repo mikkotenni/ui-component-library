@@ -1,21 +1,23 @@
 <template>
-  <input
-    :type="type"
-    class="input"
-    :class="_.extend({ 'input--disabled': disabled }, modifierClasses)"
-    :name="name"
-    :disabled="disabled"
-    v-model="editableValue"
-    @focus="handleFocus"
-    @blur="handleBlur"
-    v-on="filteredParentListeners"
-    ref="input"
-  />
+  <div>
+    <input
+      :type="type"
+      class="input"
+      :class="_.extend({ 'input--disabled': disabled }, modifierClasses)"
+      :name="name"
+      :disabled="disabled"
+      v-model="editableValue"
+      @focus="handleFocus"
+      @blur="handleBlur"
+      v-on="filteredParentListeners"
+      ref="input"
+    />
+  </div>
 </template>
 
 <script>
 import Vue from "vue";
-import ComponentBase from "@/components/Component.Base.vue";
+import ComponentBase from "../Component.Base.vue";
 import lodash from "lodash";
 
 export default Vue.extend({
